@@ -1,3 +1,8 @@
+<?php
+//引入session
+include 'username_check_session.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,14 +29,14 @@
 <!--结果集标题与导航组件 结束-->
 
 <div class="result_wrap">
-    <form method="post" onsubmit="return changePass()">
+    <form method="post" onsubmit="return changePass()" action="pass_check.php">
         <input type="hidden" name="_token" value="X25wGVjFqDXvq7vAUAJTjTAHfX0RhkGufucRdzGh">
         <table class="add_tab">
             <tbody>
             <tr>
                 <th width="120"><i class="require">*</i>原密码：</th>
                 <td>
-                    <input type="password" name="password_o"> </i>请输入原始密码</span>
+                    <input type="password" name="password_o"></i>请输入原始密码</span>
                 </td>
             </tr>
             <tr>
@@ -59,3 +64,4 @@
 </div>
 </body>
 </html>
+

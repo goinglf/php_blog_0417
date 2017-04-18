@@ -48,4 +48,6 @@ if (md5($password) != $data[0]){
     echo "账户或密码不正确";
     return;
 }
-header('location:index.html');
+
+$_SESSION['username']=$username;
+header('location:index.php');
