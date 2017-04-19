@@ -71,8 +71,8 @@
                         </td>
                         <td><?php echo $v['title']?></td>
                         <td>
-                            <a href="#">修改</a>
-                            <a href="#" onclick="del();">删除</a>
+                            <a href="categoryEdit.php?id=<?php echo $v['id']?>">修改</a>
+                            <a href="javascript:;"  onclick="del(<?php echo $v['id']?>)" >删除</a>
                             <script>
 
                             </script>
@@ -102,16 +102,41 @@
 </html>
 
 <script>
-function del() {
-    layer.confirm('确认删除吗？', {
+function del(id) {
+        layer.confirm('确认删除吗？', {
         btn: ['确认','取消'] //按钮
-    }, function(){
-        layer.msg('删除成功', {icon: 6});
-    }, function(){
-        layer.msg('取消删除', {
-            time: 3000, //
-        });
-    });
+    }, function() {
+            $.ajax({
+                type: 'GET',
+                url: 'categoryDel.php',
+                dataType: 'json',
+                data: {id: id},
+                success: function (data) {
+                    if (data.status != 0) {
+                        layer.msg(data.message, {icon: 2});
+                        return;
+                    }
+                    layer.msg('删除成功', {
+                        icon: 6,
+                        time: 2000
+                    },
+                        function () {
+                            location.href ="categoryList.php";
+                        })
+                },
+                error: function (xhr, status) {
+                    console.log(xhr);
+                    console.log(status);
+                }
+            });
+        },
+            function () {
+                    layer.msg('取消删除', {
+                        icon: 2,
+                        time: 2000 //
+                    });
+
+                });
 
 }
 </script>
